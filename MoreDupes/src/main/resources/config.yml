@@ -1,0 +1,110 @@
+# ShulkerDupe Configuration
+# Multiple dupe methods with individual settings
+
+# ==================================================================================
+# PISTON DUPE
+# ==================================================================================
+piston-dupe:
+  enabled: true
+  
+  adjacent-block-protection: false
+  require-player-nearby: false
+  player-distance: 4.0
+  cooldown-seconds: 0.0
+  
+  # Dupe probability (0-100%)
+  # 100 = always dupes, 50 = 50% chance, 0 = never dupes
+  dupe-probability: 100.0
+  
+  verbose-logging: true
+
+# ==================================================================================
+# CACTUS DUPE
+# ==================================================================================
+cactus-dupe:
+  enabled: true
+  
+  cooldown-seconds: 0.0
+  
+  # Dupe probability (0-100%)
+  dupe-probability: 100.0
+  
+  verbose-logging: true
+
+# ==================================================================================
+# FRAME DUPE
+# ==================================================================================
+frame-dupe:
+  # Works on ALL items, not just shulkers
+  # Item pops out of frame and is ALWAYS duplicated
+  # Frame is left empty, drops 2 items (original + dupe)
+  
+  normal-frames:
+    enabled: true
+  
+  glow-frames:
+    enabled: true
+  
+  verbose-logging: true
+
+# ==================================================================================
+# PORTAL DUPE
+# ==================================================================================
+portal-dupe:
+  enabled: true
+  
+  # How it works:
+  # - Player drops ANY item (Q key)
+  # - Item enters a nether portal
+  # - Has a chance to duplicate
+  # - Each item can only dupe ONCE
+  # - Duplicated items cannot be duped again
+  # - Only player-dropped items can be duped
+  
+  cooldown-seconds: 0.0
+  
+  # Dupe probability (0-100%)
+  dupe-probability: 100.0
+  
+  verbose-logging: true
+
+# ==================================================================================
+# MINECART DUPE
+# ==================================================================================
+minecart-dupe:
+  enabled: true
+  
+  # How it works:
+  # - Break a chest minecart or hopper minecart
+  # - All items inside have a chance to duplicate
+  # - Drops original items + duplicates
+  
+  # Dupe probability (0-100%)
+  dupe-probability: 100.0
+  
+  verbose-logging: true
+
+# ==================================================================================
+# DROPPER / DISPENSER DUPE
+# ==================================================================================
+dropper-dispenser-dupe:
+  # How it works:
+  # - When a dropper/dispenser activates and drops/shoots an item
+  # - The item has a chance to duplicate
+  # - Original item is dispensed + duplicate drops nearby
+  
+  dropper:
+    enabled: true
+    # Dupe probability (0-100%)
+    dupe-probability: 100.0
+  
+  dispenser:
+    enabled: true
+    # Dupe probability (0-100%)
+    dupe-probability: 100.0
+  
+  # Require player nearby (similar to piston dupe)
+  require-player-nearby: false
+  player-distance: 4.0
+  
+  verbose-logging: true
