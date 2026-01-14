@@ -5,7 +5,7 @@ A Minecraft plugin that adds multiple item duplication methods to your server. C
 ## Features
 
 ### 🔧 Piston Dupe
-Push shulker boxes with pistons into solid blocks to duplicate them. Configurable player distance requirements and cooldowns.
+Push shulker boxes with pistons to duplicate them. Configurable player distance requirements and cooldowns.
 
 ### 🌵 Cactus Dupe
 Drop shulker boxes onto cacti to duplicate them instead of destroying them.
