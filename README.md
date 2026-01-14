@@ -85,7 +85,7 @@ Created by **MistaSoup**
 
 ## Support
 
-Found a bug or have a suggestion? Open an issue on the [GitHub Issues](https://github.com/yourusername/MoreDupes/issues) page.
+Found a bug or have a suggestion? Open an issue on the [GitHub Issues](https://github.com/MistaSoup/MoreDupes/issues) page.
 
 ## License
 
