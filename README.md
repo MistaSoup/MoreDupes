@@ -1,165 +1,92 @@
-# EditionPerms
+# MoreDupes
 
-A lightweight Minecraft plugin for managing permissions separately for Java Edition and Bedrock Edition players on crossplay servers.
+A Minecraft plugin that adds multiple item duplication methods to your server. Compatible with Folia and Paper 1.21+.
 
 ## Features
 
-- 🎮 **Separate permissions for Java and Bedrock players**
-- 🔍 **Automatic player detection** via username prefix and UUID checking
-- 🔄 **Fast reload** - Update permissions without restarting the server
-- ⚡ **Folia compatible** - Works on both Paper and Folia servers
-- 🛠️ **Simple configuration** - Easy YAML setup
-- 🪶 **Lightweight** - Minimal performance impact
+### 🔧 Piston Dupe
+Push shulker boxes with pistons into solid blocks to duplicate them. Configurable player distance requirements and cooldowns.
 
-## Why was this plugin created?
+### 🌵 Cactus Dupe
+Drop shulker boxes onto cacti to duplicate them instead of destroying them.
 
-This plugin was originally created to solve a specific problem on crossplay servers: giving Java Edition players anticheat bypass permissions while keeping Bedrock Edition players under normal anticheat protection. It has since evolved into a simple permission management system for any crossplay server running Geyser/Floodgate.
+### 🖼️ Frame Dupe
+Remove items from item frames (normal or glow) and they'll duplicate as they pop out.
 
-## Requirements
+### 🌀 Portal Dupe
+Throw any item through a nether portal and it has a chance to duplicate. Each item can only dupe once.
 
-- Minecraft 1.21.x
-- Paper or Folia server
-- Java 21+
+### 🛤️ Minecart Dupe
+Break chest or hopper minecarts to duplicate all items inside.
+
+### 📦 Dropper/Dispenser Dupe
+When droppers or dispensers activate, the dispensed item has a chance to duplicate. Items spawn at the front of the block.
 
 ## Installation
 
-1. Download the latest `EditionPerms-x.x.x.jar` from [Releases](https://github.com/MistaSoup/EditionPerms/releases)
-2. Place the JAR file in your `plugins/` folder
+1. Download the latest `MoreDupes-1.0.0.jar` from the releases page
+2. Place it in your server's `plugins` folder
 3. Restart your server
-4. Edit `plugins/EditionPerms/config.yml` to configure permissions
-5. Run `/editionpermsreload` or restart to apply changes
+4. Configure settings in `plugins/MoreDupes/config.yml`
+
+## Building from Source
+
+Requires Java 21 and Maven:
+
+```bash
+git clone https://github.com/yourusername/MoreDupes.git
+cd MoreDupes
+mvn clean package
+```
+
+The compiled jar will be in `target/MoreDupes-1.0.0.jar`
 
 ## Configuration
 
-The plugin creates a `config.yml` file in `plugins/EditionPerms/`:
+Each dupe method can be individually enabled/disabled and configured. See `config.yml` for all options:
+
+- **Enable/disable** each dupe method
+- **Probability settings** - control how often dupes occur (0-100%)
+- **Player distance requirements** - require players to be nearby for some methods
+- **Cooldowns** - prevent spam duping
+- **Verbose logging** - detailed console output for debugging
+
+### Example Config Snippet
+
 ```yaml
-# ==================================================================================
-# BEDROCK PLAYER DETECTION
-# ==================================================================================
-# These settings determine HOW the plugin identifies Bedrock players
-detection:
-  # Bedrock players have this prefix in their username (default: ".")
-  # Example: ".PlayerName" is a Bedrock player, "PlayerName" is Java
-  bedrock-prefix: "."
-  
-  # Also check UUID format to detect Bedrock players (recommended: true)
-  # Bedrock UUIDs start with "00000000-0000-0000"
-  bedrock-uuid-check: true
+piston-dupe:
+  enabled: true
+  adjacent-block-protection: false
+  require-player-nearby: false
+  player-distance: 4.0
+  dupe-probability: 100.0
+  verbose-logging: true
 
-# ==================================================================================
-# PERMISSION GROUPS
-# ==================================================================================
-# After a player is identified as Java or Bedrock, these groups assign permissions
-
-groups:
-  # Give permissions to ALL Java players
-  default-java:
-    type: java
-    prefix: ""  # LEAVE EMPTY to apply to ALL Java players
-    permissions:
-      - minecraft.command.me
-      - minecraft.command.trigger
-  
-  # Give permissions to ALL Bedrock players
-  default-bedrock:
-    type: bedrock
-    prefix: ""  # LEAVE EMPTY to apply to ALL Bedrock players
-    permissions:
-      - minecraft.command.me
-      - minecraft.command.trigger
-```
-
-### Example Configurations
-
-**Give Java players anticheat bypass:**
-```yaml
-groups:
-  default-java:
-    type: java
-    prefix: ""
-    permissions:
-      - nocheatplus.shortcut.bypass
-      - spartan.bypass
-      - essentials.spawn
-  
-  default-bedrock:
-    type: bedrock
-    prefix: ""
-    permissions:
-      - essentials.spawn
-```
-
-**Give Java players creative permissions:**
-```yaml
-groups:
-  default-java:
-    type: java
-    prefix: ""
-    permissions:
-      - worldedit.selection
-      - essentials.fly
-      - essentials.gamemode
-  
-  default-bedrock:
-    type: bedrock
-    prefix: ""
-    permissions:
-      - essentials.spawn
+minecart-dupe:
+  enabled: true
+  dupe-probability: 100.0
+  verbose-logging: true
 ```
 
 ## Commands
 
-| Command | Aliases | Permission | Description |
-|---------|---------|------------|-------------|
-| `/editionpermsreload` | `/epr`, `/epreload`, `/editionreload` | `editionperms.reload` | Reloads the config and reapplies all permissions |
+- `/moredupesreload` (aliases: `/mdr`, `/mdreload`) - Reload the plugin configuration
+  - Permission: `moredupes.reload` (default: op)
 
-## Permissions
+## Compatibility
 
-- `editionperms.reload` - Allows reloading the plugin configuration (default: OP)
+- **Server Software**: Folia, Paper, Purpur (1.21+)
+- **Java Version**: 21
+- **API Version**: 1.21
 
-## How It Works
+## Author
 
-1. **Player joins** → Plugin detects if they're Java or Bedrock
-   - Checks username prefix (default: `.` for Bedrock)
-   - Checks UUID format (`00000000-0000-0000-xxxx` for Bedrock)
+Created by **MistaSoup**
 
-2. **Groups are checked** → Plugin finds matching groups based on player type
+## Support
 
-3. **Permissions applied** → All matching groups' permissions are granted instantly
-
-## Building from Source
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/EditionPerms.git
-cd EditionPerms
-```
-
-2. Build with Maven:
-```bash
-mvn clean package
-```
-
-3. Find the compiled JAR in `target/EditionPerms-1.0.0.jar`
+Found a bug or have a suggestion? Open an issue on the [GitHub Issues](https://github.com/yourusername/MoreDupes/issues) page.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Credits
-
-Created with assistance from Claude (Anthropic)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-⭐ If you find this plugin useful, please consider giving it a star on GitHub!
+This project is provided as-is for educational and server customization purposes.
