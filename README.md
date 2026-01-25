@@ -79,13 +79,6 @@ minecart-dupe:
 - **Java Version**: 21
 - **API Version**: 1.21
 
-## Author
-
-Created by **MistaSoup**
-
-## Support
-
-Found a bug or have a suggestion? Open an issue on the [GitHub Issues](https://github.com/MistaSoup/MoreDupes/issues) page.
 
 ## License
 
